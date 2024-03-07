@@ -27,7 +27,7 @@
   transition-duration: 0.15s;
 
   &:focus {
-    outline: #707070 solid 2px;
+    outline: var(--item-border-color) solid 2px;
   }
 }
 

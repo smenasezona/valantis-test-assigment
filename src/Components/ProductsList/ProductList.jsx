@@ -18,6 +18,7 @@ const ProductList = () => {
     const [skeletonCount, setSkeletonCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(getFromLocalStorage('currentPage', 1));
     const [filters, setFilters] = useState({})
+    const [totalPages, setTotalPages] = useState(Math.ceil(TOTAL_IDS / PRODUCTS_PER_PAGE));
 
     useEffect(() => {
         async function loadProducts() {
@@ -30,9 +31,13 @@ const ProductList = () => {
                     ids = [...ids, ...filteredIds];
                 }
             } else {
-                ids = await getIds((currentPage - 1) * PRODUCTS_PER_PAGE, PRODUCTS_PER_PAGE); // Иначе получаем идентификаторы товаров как обычно
+                ids = await getIds(); // Получаем все идентификаторы, а не только для текущей страницы
             }
-            const items = await getItems(ids);
+            const newTotalPages = Math.ceil(ids.length / PRODUCTS_PER_PAGE);
+            setTotalPages(newTotalPages); // Обновляем totalPages здесь
+
+            const items = await getItems(
+                ids.slice((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE)); // Получаем только товары для текущей страницы
             const uniqueItems = removeDuplicates(items);
             setLoading(false);
             setProducts(uniqueItems);
@@ -66,9 +71,7 @@ const ProductList = () => {
 
     return (
         <>
-            <Pagination currentPage={currentPage} onPageChange={setCurrentPage}
-                        totalPages={Math.ceil(TOTAL_IDS / PRODUCTS_PER_PAGE)}
-            />
+            <Pagination currentPage={currentPage} onPageChange={setCurrentPage} totalPages={totalPages}/>
 
             <Filter onFilter={handleFilter}/>
 
@@ -80,9 +83,6 @@ const ProductList = () => {
                     ))
                 }
             </div>
-            <Pagination currentPage={currentPage} onPageChange={setCurrentPage}
-                        totalPages={Math.ceil(TOTAL_IDS / PRODUCTS_PER_PAGE)}
-            />
         </>
     )
 }
