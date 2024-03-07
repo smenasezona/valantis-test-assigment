@@ -1,0 +1,37 @@
+.item_container {
+  border: 1px solid var(--item-border-color);
+  margin: 4rem 4rem 4rem;
+  padding: 1rem;
+  background-color: var(--item-container-color);
+  min-width: 50%;
+  min-height: 55%;
+  border-radius: 0.35rem;
+  
+  &:hover {
+    cursor: pointer;
+    background-color: var(--item-container-hover);
+  }
+}
+
+.product_id {
+  font-size: 10px;
+  color: var(--product-id-color);
+}
+
+.product_name {
+  color: var(--product-name-color);
+  font-size: 20px;
+}
+
+.product_price {
+  color: var(--product-price-color);
+  font-size: 16px;
+  padding: 0.5rem;
+  background-color: #232323;
+  border-radius: 0.3rem;
+}
+
+.product_brand {
+  color: var(--product-brand-color);
+  font-size: 20px;
+}

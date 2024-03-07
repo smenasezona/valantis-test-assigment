@@ -1,0 +1,22 @@
+.skeleton {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border: 1px solid var(--item-border-color);
+  margin: 4rem;
+  padding: 1rem;
+  min-width: 50%;
+  min-height: 10rem;
+  border-radius: 0.35rem;
+  animation: pulse 2s linear infinite;
+  background: linear-gradient(-90deg, #202020 25%, #222222 50%, #212121 75%);
+  background-size: 200% 200%;
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}

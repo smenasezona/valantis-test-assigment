@@ -1,0 +1,48 @@
+import {useEffect, useState} from 'react';
+import axios from 'axios';
+import md5 from 'md5';
+
+const App = () => {
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const password = 'Valantis';
+            const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+            const authString = md5(`${password}_${timestamp}`);
+
+            try {
+                const result = await axios({
+                    method: 'post',
+                    url: 'http://api.valantis.store:40000/',
+                    headers: {'X-Auth': authString},
+                    data: {
+                        "action": "get_items",
+                        "params": {"ids": ["1789ecf3-f81c-4f49-ada2-83804dcc74b0"]}
+                    }
+                });
+
+                setData(result.data);
+            } catch (error) {
+                setError(error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (error) {
+        return <div>Ошибка: {error.message}</div>;
+    } else if (!data) {
+        // return <div>Загрузка...</div>;
+    } else {
+        return (
+            <div>
+                {data.result.price}
+            </div>
+        );
+    }
+};
+
+export default App;

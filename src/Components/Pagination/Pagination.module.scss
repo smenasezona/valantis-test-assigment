@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+.arrow, .page_number {
+  border: none;
+  background-color: var(--product-name-color);
+  color: #000;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.page_number.active {
+  color: var(--main-text-color);
+  background-color: var(--product-id-color);
+  transition: background-color 0.3s ease-in-out;
+  border: 1px solid var(--item-border-color);
+}
+
+.arrow:disabled, .page_number:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

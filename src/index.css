@@ -1,0 +1,11 @@
+@import './assets/styles/variable.scss';
+@import "./assets/styles/fonts.scss";
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    font-family: "Noto Sans", sans-serif;
+}
