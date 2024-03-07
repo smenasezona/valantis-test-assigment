@@ -36,7 +36,7 @@ const Pagination = ({totalPages, currentPage, onPageChange}) => {
                 &gt;
             </button>
         </span>
-    );
-};
+    )
+}
 
-export default Pagination;
+export default Pagination
